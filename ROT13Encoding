@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class ROT13Encoding {
+	
+	public static final String CAPITALS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public static String rot13(String input) {
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < input.length(); i++) {
+           char temp = input.charAt(i);
+           if (Character.isLetter(temp) && Character.isUpperCase(temp)) {
+               int index = CAPITALS.indexOf(temp);
+               int newIndex = (index + 13) % 26;
+               char letter = CAPITALS.charAt(newIndex);
+               sb.append(letter);
+           }
+           else {
+              sb.append(temp);
+           }
+        }
+        
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Enter a string to encode: ");
+        String input = keyboard.nextLine();
+        String encoded = rot13(input);
+        System.out.println("Your string encoded is  : " + encoded);
+        keyboard.close();
+    }
+
+}
